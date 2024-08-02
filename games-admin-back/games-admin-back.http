@@ -1,0 +1,6 @@
+@games_admin_back_HostAddress = http://localhost:5201
+
+GET {{games_admin_back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
