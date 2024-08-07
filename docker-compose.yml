@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mysqlgamesdb
+    ports:
+      - "3307:3306" # Eğer 3306 portu doluysa, 3307 portunu kullanın
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: GamesConfigurationDB
+    ports:
+      - "27017:27017" # MongoDB portu
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  dotnet-app:
+    image: test:latest
+    container_name: dotnet-app
+    build:
+      context: . # Dockerfile'ın bulunduğu dizin
+    ports:
+      - "8187:8080" # .NET uygulamanızın portu
+    networks:
+      - app-network
+    depends_on:
+      - mysql # MySQL konteyneri başlamadan .NET uygulaması başlamaz
+      - mongodb # MongoDB konteyneri başlamadan .NET uygulaması başlamaz
+
+volumes:
+  mysql-data:
+  mongo-data:
+
+networks:
+  app-network:

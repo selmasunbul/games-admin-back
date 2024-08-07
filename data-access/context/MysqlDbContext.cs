@@ -27,8 +27,7 @@ namespace data_access.context
         {
             base.OnConfiguring(optionsBuilder);
 
-            //     var x = _configuration.GetConnectionString("TransportConnection");
-            var x = "Server=localhost;Database=mysqlgamesdb;User=root;Password=123456;";
+            var x = "Server=mysql;Port=3306;Database=mysqlgamesdb;User Id=root;Password=123456;";
 
             optionsBuilder.UseMySql(x, ServerVersion.AutoDetect(x));
         }
