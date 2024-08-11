@@ -133,14 +133,14 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 
-#region Apply Migrations Automatically
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<MysqlDbContext>();
-    context.Database.Migrate();
-}
-#endregion
+//#region Apply Migrations Automatically
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<MysqlDbContext>();
+//    context.Database.Migrate();
+//}
+//#endregion
 
 
 
